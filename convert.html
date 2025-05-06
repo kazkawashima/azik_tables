@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>日本語ひらがな変換</title>
+  <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js"></script>
+  <script>
+    function convert() {
+      const inputText = document.getElementById("input").value;
+      kuromoji.load({ dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/" }).then(function (tokenizer) {
+        const tokens = tokenizer.tokenize(inputText);
+        let hiragana = "";
+        for (let i = 0; i < tokens.length; i++) {
+          hiragana += tokens[i].reading;
+        }
+        document.getElementById("output").textContent = hiragana;
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>日本語ひらがな変換</h1>
+  <textarea id="input" oninput="convert()"></textarea>
+  <p>ひらがな: <span id="output"></span></p>
+</body>
+</html>
